@@ -6,8 +6,11 @@ dotenv({
 });
 const config: GatsbyConfig = {
   siteMetadata: {
-    title: `groomy`,
+    title: `Groomy`,
     siteUrl: `https://www.yourdomain.tld`,
+    metaDescription:
+      "Impara dai migliori chef italiani ricette orientali, funzionali ed estive",
+    author: "@hpv4learning",
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
