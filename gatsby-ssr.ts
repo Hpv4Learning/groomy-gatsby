@@ -1,3 +1,5 @@
+import "./src/styles/font.css";
+
 import { useWrapWithProvider } from "./useWrapWithProvider";
 import { GatsbySSR } from "gatsby";
 import { serveStaticFont } from "./serveStaticFont";

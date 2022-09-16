@@ -1,5 +1,5 @@
 import React from "react";
-import { useCustomTheme } from "./src/styles/theme";
+import { GlobalStyle, useCustomTheme } from "./src/styles/theme";
 import { ThemeProvider } from "styled-components";
 
 export const useWrapWithProvider = ({
@@ -10,7 +10,10 @@ export const useWrapWithProvider = ({
   const theme = useCustomTheme();
   return (
     <React.StrictMode>
-      <ThemeProvider theme={theme}>{element}</ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        {element}
+      </ThemeProvider>
     </React.StrictMode>
   );
 };

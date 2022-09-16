@@ -1,3 +1,5 @@
+import { createGlobalStyle } from "styled-components";
+
 export const useCustomTheme = () => ({
   colors: {
     yellow: {
@@ -23,3 +25,9 @@ export const useCustomTheme = () => ({
 });
 
 export type ThemeType = ReturnType<typeof useCustomTheme>;
+
+export const GlobalStyle = createGlobalStyle({
+  body: {
+    fontFamily: "Poppins",
+  },
+});
