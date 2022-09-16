@@ -1,3 +1,5 @@
 import { useWrapWithProvider } from "./useWrapWithProvider";
+import { GatsbyBrowser } from "gatsby";
 
-export const wrapRootElement = useWrapWithProvider;
+export const wrapRootElement: GatsbyBrowser["wrapRootElement"] =
+  useWrapWithProvider;
