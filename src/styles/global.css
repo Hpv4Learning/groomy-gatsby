@@ -1,0 +1,56 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+    background: white;
+}
+
+::-o-scrollbar {
+    width: 7px;
+    height: 7px;
+    background: white;
+}
+
+::-moz-scrollbar {
+    width: 7px;
+    height: 7px;
+    background: white;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 7px;
+    height: 7px;
+    background: var(--yellow-300);
+    border-radius: 4px;
+}
+
+::-o-scrollbar-thumb {
+    width: 7px;
+    height: 7px;
+    background: var(--yellow-300);
+    border-radius: 4px;
+}
+
+::-moz-scrollbar-thumb {
+    width: 7px;
+    height: 7px;
+    background: var(--yellow-300);
+    border-radius: 4px;
+}
+
+:root{
+    --yellow-300: #FDFBF7;
+    --yellow-400: #FAF3E3;
+    --yellow-500: #FDE8A2;
+    --orange-400: #F16529;
+    --orange-hover: #F28354;
+    --purple-400:#55328C;
+    --purple-hover: #61468C;
+}
