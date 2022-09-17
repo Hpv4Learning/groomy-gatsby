@@ -2,6 +2,7 @@ import * as React from "react";
 import type { HeadFC } from "gatsby";
 import styled from "styled-components";
 import { ThemeType } from "../styles/theme";
+import { Display, Heading, Label, Paragraph, Subtitle } from "../components";
 
 const Prova = styled.div(({ theme }: { theme: ThemeType }) => ({
   width: "400px",
@@ -9,19 +10,19 @@ const Prova = styled.div(({ theme }: { theme: ThemeType }) => ({
   background: theme.colors.orange[400],
 }));
 
-const Typography = styled.div<{ weight?: keyof ThemeType["fontWeight"] }>(
-  ({ theme }: { theme: ThemeType }) =>
-    ({ weight }) => ({
-      fontSize: "24px",
-      fontWeight: weight ? theme.fontWeight[weight] : 400,
-    }),
-);
-
 const IndexPage = () => {
   return (
     <main>
       <Prova as='section' />
-      <Typography weight='heavy'>Ciao</Typography>
+      <Label weight='heavy'>Lorem ipsum dolor sit amet consectetur.</Label>
+      <Paragraph weight='heavy'>
+        Lorem ipsum dolor sit amet consectetur.
+      </Paragraph>
+      <Heading weight='heavy'>Lorem ipsum dolor sit amet consectetur.</Heading>
+      <Subtitle weight='heavy'>
+        Lorem ipsum dolor sit amet consectetur.
+      </Subtitle>
+      <Display weight='heavy'>Lorem ipsum dolor sit amet consectetur.</Display>
     </main>
   );
 };
