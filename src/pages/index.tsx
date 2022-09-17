@@ -2,7 +2,14 @@ import * as React from "react";
 import type { HeadFC } from "gatsby";
 import styled from "styled-components";
 import { ThemeType } from "../styles/theme";
-import { Display, Heading, Label, Paragraph, Subtitle } from "../components";
+import {
+  Button,
+  Display,
+  Heading,
+  Label,
+  Paragraph,
+  Subtitle,
+} from "../components";
 
 const Prova = styled.div(({ theme }: { theme: ThemeType }) => ({
   width: "400px",
@@ -23,6 +30,20 @@ const IndexPage = () => {
         Lorem ipsum dolor sit amet consectetur.
       </Subtitle>
       <Display weight='heavy'>Lorem ipsum dolor sit amet consectetur.</Display>
+      <div style={{ marginTop: "72" }}>
+        <Button>Contained</Button>
+        <Button color='purple'>Contained</Button>
+        <Button variant='outlined'>Outlined</Button>
+        <Button variant='outlined' size='sm' isRounded>
+          Outlined
+        </Button>
+        <Button leftIcon={<div>--K</div>} size='xl' variant='outlined'>
+          With Icon
+        </Button>
+        <Button rightIcon={<div>--K</div>} size='md'>
+          With Icon
+        </Button>
+      </div>
     </main>
   );
 };

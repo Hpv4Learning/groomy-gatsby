@@ -9,9 +9,11 @@ export const useCustomTheme = () => ({
     },
     orange: {
       400: "#F16529",
+      hover: "#F28354",
     },
-    pruple: {
-      400: "55328C",
+    purple: {
+      400: "#55328C",
+      hover: "#61468C",
     },
   },
   shadow: {
