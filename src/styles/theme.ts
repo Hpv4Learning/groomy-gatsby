@@ -21,7 +21,9 @@ export const useCustomTheme = () => ({
     heavy: "drop-shadow(0px 80px 60px rgba(0, 0, 0, 0.15))",
   },
   fontWeight: {
-    semibold: 400,
+    regular: 400,
+    medium: 500,
+    semibold: 600,
     heavy: 700,
   },
 });
