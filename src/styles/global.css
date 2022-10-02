@@ -6,6 +6,15 @@
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+ul {
+    margin: 0px;
+}
+
 ::-webkit-scrollbar {
     width: 7px;
     height: 7px;
@@ -45,12 +54,12 @@
     border-radius: 4px;
 }
 
-:root{
+:root {
     --yellow-300: #FDFBF7;
     --yellow-400: #FAF3E3;
     --yellow-500: #FDE8A2;
     --orange-400: #F16529;
     --orange-hover: #F28354;
-    --purple-400:#55328C;
+    --purple-400: #55328C;
     --purple-hover: #61468C;
 }
