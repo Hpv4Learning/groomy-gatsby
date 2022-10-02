@@ -9,11 +9,9 @@ export const useWrapWithProvider = ({
 }) => {
   const theme = useCustomTheme();
   return (
-    <React.StrictMode>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        {element}
-      </ThemeProvider>
-    </React.StrictMode>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      {element}
+    </ThemeProvider>
   );
 };

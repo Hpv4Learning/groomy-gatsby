@@ -2,9 +2,9 @@ import * as React from "react";
 import { HeadFC, navigate } from "gatsby";
 
 const NotFoundPage = () => {
-  React.useEffect(() => {
-    navigate("/");
-  }, []);
+  // React.useEffect(() => {
+  //   navigate("/");
+  // }, []);
   return <></>;
 };
 

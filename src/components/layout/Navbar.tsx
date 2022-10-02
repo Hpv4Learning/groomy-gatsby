@@ -1,4 +1,4 @@
-import { Link } from "gatsby";
+import { Link, navigate } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
 import styled from "styled-components";
@@ -48,7 +48,7 @@ export const Navbar = () => {
           <StaticImage src='../../images/logo.png' alt='groomy Logo' />
         </div>
         <div className='nav-links'>
-          <Link to='/'>
+          <Link to='/' onClick={() => navigate("/about/")}>
             <div className='nav-label'>
               <Label>Home</Label>
             </div>
