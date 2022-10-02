@@ -7,11 +7,16 @@ import { Label } from "../Typography";
 
 const StyledBox = styled.div({
   height: "72px",
+  position: "absolute",
+  top: "0px",
+  width: "100%",
+  zIndex: 2,
+
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  background: "transaprent",
+  background: "var(--yellow-400)",
   ".nav-container": {
     display: "flex",
     alignItems: "center",
