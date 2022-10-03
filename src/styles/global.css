@@ -115,3 +115,7 @@ ul {
 .justify-content-between {
     justify-content: space-between;
 }
+
+.flex-wrap {
+    flex-wrap: flex-wrap;
+}

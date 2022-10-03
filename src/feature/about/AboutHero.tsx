@@ -31,7 +31,9 @@ const AboutHero = () => {
       >
         <div
           style={{
-            marginLeft: "24px",
+            maxWidth: "768px",
+            width: "calc( 100% - 48px )",
+            margin: "auto",
           }}
         >
           <Display weight='semibold'>Chi siamo</Display>
