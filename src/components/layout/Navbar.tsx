@@ -42,31 +42,40 @@ const StyledBox = styled.div({
 
 export const Navbar = () => {
   return (
-    <StyledBox as='nav'>
-      <Container className='nav-container'>
-        <div className='nav-logo'>
-          <StaticImage src='../../images/logo.png' alt='groomy Logo' />
-        </div>
-        <div className='nav-links'>
-          <Link to='/' onClick={() => navigate("/about/")}>
-            <div className='nav-label'>
-              <Label>Home</Label>
-            </div>
-          </Link>
+    <>
+      <StyledBox as='nav'>
+        <Container className='nav-container'>
+          <div className='nav-logo'>
+            <StaticImage src='../../images/logo.png' alt='groomy Logo' />
+          </div>
+          <div className='nav-links'>
+            <Link to='/' onClick={() => navigate("/about/")}>
+              <div className='nav-label'>
+                <Label>Home</Label>
+              </div>
+            </Link>
 
-          <Link to='/about/'>
-            <div className='nav-label'>
-              <Label>Chi Siamo</Label>
-            </div>
-          </Link>
+            <Link to='/about/'>
+              <div className='nav-label'>
+                <Label>Chi Siamo</Label>
+              </div>
+            </Link>
 
-          <Link to='/ricettario/'>
-            <div className='nav-label'>
-              <Label>Ricettario</Label>
-            </div>
-          </Link>
-        </div>
-      </Container>
-    </StyledBox>
+            <Link to='/ricettario/'>
+              <div className='nav-label'>
+                <Label>Ricettario</Label>
+              </div>
+            </Link>
+          </div>
+        </Container>
+      </StyledBox>
+      <div
+        style={{
+          height: "72px",
+          width: "100%",
+          zIndex: -1,
+        }}
+      ></div>
+    </>
   );
 };

@@ -2,7 +2,8 @@ import { StaticImage } from "gatsby-plugin-image";
 import React from "react";
 import styled from "styled-components";
 import { ThemeType } from "../../styles/theme";
-import { Typography } from "../Typography";
+import { RoundedImageContainer } from "../../components/RoundedImageContainer";
+import { Typography } from "../../components/Typography";
 
 const StyledBox = styled("div")<any>(function ({
   theme,
@@ -11,7 +12,7 @@ const StyledBox = styled("div")<any>(function ({
 }) {
   return {
     background: theme.colors.yellow[400],
-    height: "100vh",
+    height: "calc( 100vh - 72px )",
     display: "flex",
     width: "100%",
     alignItems: "center",
@@ -21,36 +22,19 @@ const StyledBox = styled("div")<any>(function ({
   };
 });
 
-const StyledImageContainer = styled<any>("div")(function ({
-  theme,
-}: {
-  theme: ThemeType;
-}) {
-  return {
-    borderRadius: "50%",
-    maxWidth: "657px",
-    width: "100%",
-    height: "657px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    background: theme.colors.yellow[500],
-    ".wrapper": {
-      maxWidth: "467px",
-      maxHeight: "467px",
-      width: "100%",
-    },
-  };
-});
-
 const HomeHero = () => {
   return (
     <StyledBox>
-      <StyledImageContainer>
+      <RoundedImageContainer>
         <div className='wrapper'>
-          <StaticImage src='../../images/logo.png' alt='Groomy Big Logo' />
+          <StaticImage
+            src='../../images/logo.png'
+            alt='Groomy Big Logo'
+            placeholder='tracedSVG'
+            loading='eager'
+          />
         </div>
-      </StyledImageContainer>
+      </RoundedImageContainer>
 
       <Typography
         weight='heavy'

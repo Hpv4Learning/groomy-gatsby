@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { HeadFC } from "gatsby";
 import { Layout } from "../components/layout/Layout";
-import HomeHero from "../components/layout/HomeHero";
+import HomeHero from "../feature/home/HomeHero";
 
 const IndexPage = () => {
   return (
