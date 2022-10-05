@@ -51,7 +51,8 @@ const MenuItem = ({ title, image }: Props) => {
           />
         </div>
       ) : null}
-      <Heading weight='semibold' textAling='center'>
+
+      <Heading weight='semibold' textAling='center' className='spacer-lg'>
         {title}
       </Heading>
     </CustomBox>
@@ -75,7 +76,7 @@ export const RecipeMenu = () => {
           />
         </div>
 
-        <Heading weight='semibold' textAling='center'>
+        <Heading weight='semibold' textAling='center' className='spacer-lg'>
           all
         </Heading>
       </CustomBox>

@@ -4,6 +4,7 @@ import { Layout } from "../components/layout/Layout";
 import HomeHero from "../feature/home/HomeHero";
 import { Container } from "../components";
 import { RecipeMenu } from "../feature/home/RecipeMenu";
+import ReacipeSection from "../feature/home/ReacipeSection";
 
 const IndexPage = () => {
   return (
@@ -12,6 +13,11 @@ const IndexPage = () => {
       <div className='spacer-xxxl'>
         <Container>
           <RecipeMenu />
+        </Container>
+      </div>
+      <div className='spacer-xxxl'>
+        <Container>
+          <ReacipeSection />
         </Container>
       </div>
     </Layout>

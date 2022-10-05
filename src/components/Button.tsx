@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ButtonHTMLAttributes } from "react";
 import styled from "styled-components";
 import { ThemeType, useCustomTheme } from "../styles/theme";
 
@@ -100,21 +100,30 @@ ButtonBase.defaultProps = {
   variant: "contained",
 };
 
-type Props = {
+type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
   rightIcon?: React.ReactElement;
   leftIcon?: React.ReactElement;
 };
 
 export const Button = (props: BaseButtonProps & Props) => {
-  const { size, color, variant, isRounded, children, rightIcon, leftIcon } =
-    props;
+  const {
+    size,
+    color,
+    variant,
+    isRounded,
+    children,
+    rightIcon,
+    leftIcon,
+    ...rest
+  } = props;
   return (
     <ButtonBase
       size={size}
       color={color}
       variant={variant}
       isRounded={isRounded}
+      {...rest}
     >
       <div
         style={{
