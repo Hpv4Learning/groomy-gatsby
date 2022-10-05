@@ -49,7 +49,7 @@ export const Navbar = () => {
             <StaticImage src='../../images/logo.png' alt='groomy Logo' />
           </div>
           <div className='nav-links'>
-            <Link to='/' onClick={() => navigate("/about/")}>
+            <Link to='/'>
               <div className='nav-label'>
                 <Label>Home</Label>
               </div>

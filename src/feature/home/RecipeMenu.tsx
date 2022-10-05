@@ -1,4 +1,4 @@
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, Link, useStaticQuery } from "gatsby";
 import {
   GatsbyImage,
   getImage,
@@ -9,6 +9,7 @@ import React from "react";
 import styled from "styled-components";
 import { Heading } from "../../components";
 import { ThemeType } from "../../styles/theme";
+import { createSlugFromTitle } from "../../utils";
 
 type Props = {
   title: string | null;
@@ -63,30 +64,17 @@ export const RecipeMenu = () => {
   const menu: Queries.MenuQuery = useStaticQuery(query);
   return (
     <div className='flex align-items-center justify-content-between'>
-      <CustomBox>
-        <div
-          style={{
-            maxWidth: "64px",
-          }}
-        >
-          <StaticImage
-            src='./images/salad.png'
-            alt={"Default Item Title"}
-            placeholder='tracedSVG'
-          />
-        </div>
-
-        <Heading weight='semibold' textAling='center' className='spacer-lg'>
-          all
-        </Heading>
-      </CustomBox>
       {menu.allSanityCategory.nodes.map((item) => {
         return (
-          <MenuItem
+          <Link
+            style={{
+              display: "contents",
+            }}
             key={item.titolo}
-            title={item.titolo}
-            image={item.image?.asset}
-          />
+            to={`/${createSlugFromTitle(item.titolo)}/`}
+          >
+            <MenuItem title={item.titolo} image={item.image?.asset} />
+          </Link>
         );
       })}
     </div>
