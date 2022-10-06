@@ -9,12 +9,12 @@ import {
   RoundedImageContainer,
 } from "../../components";
 import { StaticImage } from "gatsby-plugin-image";
-const Wrapper = styled("div")<any>(({ theme }: { theme: ThemeType }) => ({
+const Wrapper = styled("div")<any>({
   height: "calc( 100vh - 72px )",
   width: "100%",
   display: "flex",
   position: "relative",
-}));
+});
 
 const AboutHero = () => {
   const theme = useCustomTheme();

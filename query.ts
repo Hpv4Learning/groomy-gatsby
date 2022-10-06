@@ -3,6 +3,10 @@ export const categoryQuery = `{
     nodes {
       _id
       titolo
+      ricettario {
+        _id
+        _createdAt
+      }
     }
   }
 }`;
@@ -13,6 +17,10 @@ export type CategoryQueryProps = {
       nodes: {
         titolo: NonNullable<Queries.SanityCategory["titolo"]>;
         _id: NonNullable<Queries.SanityCategory["_id"]>;
+        ricettario: {
+          _id: NonNullable<Queries.SanityRecipe["_id"]>;
+          _createdAt: NonNullable<Queries.SanityRecipe["_createdAt"]>;
+        }[];
       }[];
     };
   };
