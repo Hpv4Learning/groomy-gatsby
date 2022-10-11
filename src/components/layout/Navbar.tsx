@@ -60,12 +60,6 @@ export const Navbar = () => {
                 <Label>Chi Siamo</Label>
               </div>
             </Link>
-
-            <Link to='/ricettario/'>
-              <div className='nav-label'>
-                <Label>Ricettario</Label>
-              </div>
-            </Link>
           </div>
         </Container>
       </StyledBox>

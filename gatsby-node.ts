@@ -26,8 +26,8 @@ export const createPages: GatsbyNode["createPages"] = async ({
         .filter((el) => Boolean(el._id))
         .sort((a, b) => Date.parse(b._createdAt) - Date.parse(a._createdAt));
       //Il più recente sarà sempre in alto a prescindere dalla pagina
-      const numPages = Math.ceil((recipes.length - 1) / ITEM_PER_PAGE);
-      Array.from({ length: numPages }).forEach((_, index) => {
+      const numOfPages = Math.ceil((recipes.length - 1) / ITEM_PER_PAGE);
+      Array.from({ length: numOfPages }).forEach((_, index) => {
         const currentPage = index + 1;
         const start = index * ITEM_PER_PAGE + 1;
         createPage({
@@ -36,11 +36,12 @@ export const createPages: GatsbyNode["createPages"] = async ({
           context: {
             category_id: category._id,
             title: category.titolo,
-            numPages,
+            numOfPages,
             currentPage,
             start,
             ITEM_PER_PAGE,
-            lastItemId: recipes.shift()?._id,
+            lastItemId: recipes[0]._id,
+            articles: recipes.map((item) => item._id),
           },
         });
       });
@@ -49,17 +50,19 @@ export const createPages: GatsbyNode["createPages"] = async ({
 
   allRecipes.data.allSanityCategory.nodes.forEach((category) => {
     const categorySlug = createSlugFromTitle(category.titolo);
-    category.ricettario.forEach((recipe) => {
-      const recipeSlug = createSlugFromTitle(recipe.titolo);
-      if (recipeSlug)
-        createPage({
-          path: `${categorySlug}/${recipeSlug}/`,
-          component: resolve("./src/templates/Category.tsx"),
-          context: {
-            _id: recipe._id,
-            title: recipe.titolo,
-          },
-        });
-    });
+    category.ricettario
+      .filter((el) => Boolean(el._id))
+      .forEach((recipe) => {
+        const recipeSlug = createSlugFromTitle(recipe.titolo);
+        if (recipeSlug)
+          createPage({
+            path: `${categorySlug}/${recipeSlug}/`,
+            component: resolve("./src/templates/Article.tsx"),
+            context: {
+              _id: recipe._id,
+              title: recipe.titolo,
+            },
+          });
+      });
   });
 };

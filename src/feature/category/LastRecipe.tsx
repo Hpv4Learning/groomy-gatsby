@@ -11,6 +11,7 @@ import {
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Link } from "gatsby";
 import { createSlugFromTitle } from "../../utils";
+import { useCategoryContext } from "./context";
 const Wrapper = styled("div")<any>({
   height: "calc( 100vh - 72px )",
   width: "100%",
@@ -18,13 +19,12 @@ const Wrapper = styled("div")<any>({
   position: "relative",
 });
 
-type LastRecipeProps = Queries.CategoryPageQuery["sanityRecipe"] & {
-  categoryLink: string;
-};
+type LastRecipeProps = Queries.CategoryPageQuery["sanityRecipe"];
 
 const LastRecipe: React.FC<Partial<LastRecipeProps>> = (props) => {
   const theme = useCustomTheme();
-  const { titolo, image, riassunto, categoryLink } = props || {};
+  const { slug } = useCategoryContext();
+  const { titolo, image, riassunto } = props || {};
   const gatsbyImage = image && getImage(image?.asset);
   if (props)
     return (
@@ -70,7 +70,7 @@ const LastRecipe: React.FC<Partial<LastRecipeProps>> = (props) => {
               height: "100%",
             }}
           >
-            <div style={{}}>
+            <div>
               <Display weight='semibold'>{titolo}</Display>
               <div
                 className='spacer-md'
@@ -82,7 +82,7 @@ const LastRecipe: React.FC<Partial<LastRecipeProps>> = (props) => {
               </div>
               {titolo ? (
                 <div className='spacer-lg'>
-                  <Link to={`/${categoryLink}/${createSlugFromTitle(titolo)}/`}>
+                  <Link to={`/${slug}/${createSlugFromTitle(titolo)}/`}>
                     <Button size='xl'>Scopri</Button>
                   </Link>
                 </div>
@@ -104,6 +104,10 @@ const LastRecipe: React.FC<Partial<LastRecipeProps>> = (props) => {
                     image={gatsbyImage}
                     alt='una dolce bambina che cucina'
                     loading='eager'
+                    style={{
+                      height: "100%",
+                      width: "100%",
+                    }}
                   />
                 </RoundedImageContainer>
               </div>

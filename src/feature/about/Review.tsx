@@ -7,7 +7,7 @@ import { starCreator } from "./utils";
 
 const ReviewBox = styled("div")(({ theme }: { theme: ThemeType }) => ({
   border: "1px solid",
-  borderColor: "#e9e9e9",
+  borderColor: theme.colors.gray[300],
   borderRadius: "16px",
   maxWidth: "343px",
   background: "white",

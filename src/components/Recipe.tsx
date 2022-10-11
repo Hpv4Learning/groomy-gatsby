@@ -2,7 +2,7 @@ import { GatsbyImage, getImage, ImageDataLike } from "gatsby-plugin-image";
 import React from "react";
 import styled from "styled-components";
 import { ThemeType } from "../styles/theme";
-import { Heading, Label, Paragraph } from "./Typography";
+import { Paragraph, Typography } from "./Typography";
 
 const CustomBox = styled("article")<any>(({ theme }: { theme: ThemeType }) => ({
   padding: "16px",
@@ -35,13 +35,14 @@ type Props = {
   description?: string | null;
   image?: ImageDataLike | null;
   chef?: string | null;
+  style?: Record<string, number | string | undefined>;
 };
 
-const Recipe = ({ title, description, image, chef }: Props) => {
+const Recipe = ({ title, description, image, chef, style }: Props) => {
   const gatsbyImage = image && getImage(image);
 
   return (
-    <CustomBox>
+    <CustomBox style={style}>
       <div className='img-container'>
         {gatsbyImage ? (
           <GatsbyImage
@@ -65,9 +66,16 @@ const Recipe = ({ title, description, image, chef }: Props) => {
       <Paragraph textAling='center' weight='medium' className='spacer-sm'>
         {title || "Missing Title"}
       </Paragraph>
-      <Label textAling='center' className='spacer-sm'>
+      <Typography
+        style={{
+          fontSize: "14px",
+          lineHeight: "18px",
+        }}
+        textAling='center'
+        className='spacer-sm'
+      >
         {description}
-      </Label>
+      </Typography>
       <div className='spacer-md' />
       <div
         className='flex'

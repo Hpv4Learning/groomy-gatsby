@@ -15,6 +15,10 @@ export const useCustomTheme = () => ({
       400: "#55328C",
       hover: "#61468C",
     },
+    gray: {
+      300: "#e9e9e9",
+      400: "#D9D9D9",
+    },
   },
   shadow: {
     light: "0px 4px 4px rgba(0, 0, 0, 0.25)",

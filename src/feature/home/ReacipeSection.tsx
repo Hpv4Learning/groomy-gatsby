@@ -1,4 +1,4 @@
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, Link, useStaticQuery } from "gatsby";
 import React from "react";
 import styled from "styled-components";
 import {
@@ -9,6 +9,7 @@ import {
   Recipe,
   Subtitle,
 } from "../../components";
+import { createSlugFromTitle } from "../../utils";
 
 const CustomBox = styled("div")({
   maxWidth: "200px",
@@ -26,33 +27,28 @@ const ReacipeSection = () => {
     <div>
       <Subtitle weight='semibold'>Ricette più Recenti</Subtitle>
       <Container>
-        <div
-          className='flex spacer-xl justify-content-between'
-          style={{
-            alignItems: "flex-start",
-          }}
-        >
-          <div className='flex justify-content-between flex-wrap'>
-            {data.allSanityRecipe.nodes.map((recipe) => (
-              <Recipe
-                key={recipe.titolo}
-                title={recipe.titolo}
-                image={recipe.image?.asset}
-                description={recipe.riassunto}
-                chef={recipe.cokkedby?.complete_name}
-              />
-            ))}
-          </div>
-          <CustomBox>
-            <Paragraph weight='medium'>Nuova Ricetta?</Paragraph>
-            <Label className='spacer-sm'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, ut
-              a.
-            </Label>
-            <Button color='purple' className='spacer-md' isRounded size='xl'>
-              Contattaci
-            </Button>
-          </CustomBox>
+        <div className='flex justify-content-between flex-wrap'>
+          {data.allSanityRecipe.nodes.map((recipe) =>
+            recipe?.category?.titolo ? (
+              <Link
+                to={`/${createSlugFromTitle(
+                  recipe?.category?.titolo,
+                )}/${createSlugFromTitle(recipe.titolo)}/`}
+                style={{ marginBottom: "34px" }}
+              >
+                <Recipe
+                  style={{
+                    height: "100%",
+                  }}
+                  key={recipe.titolo}
+                  title={recipe.titolo}
+                  image={recipe.image?.asset}
+                  description={recipe.riassunto}
+                  chef={recipe.cokkedby?.complete_name}
+                />
+              </Link>
+            ) : null,
+          )}
         </div>
       </Container>
       <div className='spacer-xxl'></div>
@@ -62,10 +58,13 @@ const ReacipeSection = () => {
 
 const query = graphql`
   query Last6Recipe {
-    allSanityRecipe(limit: 6, sort: { order: ASC, fields: _createdAt }) {
+    allSanityRecipe(limit: 8, sort: { order: ASC, fields: _createdAt }) {
       nodes {
         riassunto
         titolo
+        category {
+          titolo
+        }
         image {
           asset {
             gatsbyImageData
