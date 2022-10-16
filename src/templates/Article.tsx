@@ -7,7 +7,7 @@ import {
   Display,
   Heading,
   Paragraph,
-  Subtitle,
+  SubTitle,
 } from "../components";
 import { Layout } from "../components/layout/Layout";
 import { ThemeType } from "../styles/theme";
@@ -83,14 +83,14 @@ const Article: React.FC<
                 switch (text?.style) {
                   case "h2":
                     return text?.children?.map((child) => (
-                      <Subtitle
+                      <SubTitle
                         as='h2'
                         weight='semibold'
                         className='spacer-xl'
                         key={child?._key}
                       >
                         {child?.text}
-                      </Subtitle>
+                      </SubTitle>
                     ));
 
                   default:

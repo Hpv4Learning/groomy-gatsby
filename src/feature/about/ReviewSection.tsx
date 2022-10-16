@@ -1,7 +1,7 @@
 import { graphql, useStaticQuery } from "gatsby";
 import { getImage } from "gatsby-plugin-image";
 import React from "react";
-import { Container, Subtitle } from "../../components";
+import { Container, SubTitle } from "../../components";
 import { Review } from "./Review";
 
 export const ReviewSection = () => {
@@ -10,9 +10,9 @@ export const ReviewSection = () => {
     <>
       <div className='spacer-xxxl'>
         <Container>
-          <Subtitle textAling='center' weight='semibold'>
+          <SubTitle textAlign='center' weight='semibold'>
             I Nostri Chef
-          </Subtitle>
+          </SubTitle>
           <div className='flex aling-items-center justify-content-between flex-wrap spacer-xl'>
             {data.allSanityChef.nodes.map((chef) => {
               const image = chef.image?.asset

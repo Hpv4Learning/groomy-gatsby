@@ -3,7 +3,7 @@ import { ThemeType } from "../styles/theme";
 
 type TypographyProps = {
   color?: string;
-  textAling?:
+  textAlign?:
     | "start"
     | "end"
     | "left"
@@ -16,11 +16,11 @@ type TypographyProps = {
 
 export const Typography = styled.div<TypographyProps>(
   ({ theme }: { theme: ThemeType }) =>
-    ({ weight, textAling, color }) => ({
+    ({ weight, textAlign, color }) => ({
       fontSize: "24px",
       fontWeight: weight ? theme.fontWeight[weight] : 400,
       color: color ? color : "inherit",
-      textAlign: textAling ? textAling : "inherit",
+      textAlign: textAlign ? textAlign : "inherit",
     }),
 );
 
@@ -41,7 +41,7 @@ export const Heading = styled(Typography)({
   lineHeight: "29px",
 });
 
-export const Subtitle = styled(Typography)({
+export const SubTitle = styled(Typography)({
   fontSize: "34px",
   color: "inherit",
   lineHeight: "39px",

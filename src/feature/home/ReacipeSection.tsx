@@ -1,32 +1,14 @@
 import { graphql, Link, useStaticQuery } from "gatsby";
 import React from "react";
-import styled from "styled-components";
-import {
-  Button,
-  Container,
-  Label,
-  Paragraph,
-  Recipe,
-  Subtitle,
-} from "../../components";
+import { Container, Recipe, SubTitle } from "../../components";
 import { createSlugFromTitle } from "../../utils";
-
-const CustomBox = styled("div")({
-  maxWidth: "200px",
-  width: "100%",
-  textAlign: "center",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  padding: "0px 10px",
-});
 
 const ReacipeSection = () => {
   const data: Queries.Last6RecipeQuery = useStaticQuery(query);
   return (
     <div>
-      <Subtitle weight='semibold'>Ricette più Recenti</Subtitle>
-      <Container>
+      <SubTitle weight='semibold'>Ricette più Recenti</SubTitle>
+      <Container className='spacer-lg'>
         <div className='flex justify-content-between flex-wrap'>
           {data.allSanityRecipe.nodes.map((recipe) =>
             recipe?.category?.titolo ? (

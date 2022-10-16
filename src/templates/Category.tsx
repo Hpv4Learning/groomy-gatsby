@@ -1,6 +1,6 @@
 import { graphql, PageProps } from "gatsby";
 import React from "react";
-import { Container, Subtitle } from "../components";
+import { Container, SubTitle } from "../components";
 import { Layout } from "../components/layout/Layout";
 import { CategoryProvider } from "../feature/category/context";
 import LastRecipe from "../feature/category/LastRecipe";
@@ -28,9 +28,9 @@ const Category: React.FC<
         {data.allSanityRecipe ? <LastRecipe {...data.sanityRecipe} /> : null}
         <div className='spacer-xxxl'>
           <Container>
-            <Subtitle as='h2' weight='semibold'>
+            <SubTitle as='h2' weight='semibold'>
               {`Le nostre ricette ${pageContext.title}`}
-            </Subtitle>
+            </SubTitle>
           </Container>
           <div className='spacer-xl'>
             <RecipeCategorySection ricette={data.allSanityRecipe.nodes} />

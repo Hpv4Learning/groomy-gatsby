@@ -18,7 +18,7 @@ export const Footer = () => {
   return (
     <StyledBox>
       <Container>
-        <Paragraph textAling='center'>Made with Gastby</Paragraph>
+        <Paragraph textAlign='center'>Made with Gastby</Paragraph>
       </Container>
     </StyledBox>
   );

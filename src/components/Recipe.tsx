@@ -63,7 +63,7 @@ const Recipe = ({ title, description, image, chef, style }: Props) => {
           />
         )}
       </div>
-      <Paragraph textAling='center' weight='medium' className='spacer-sm'>
+      <Paragraph textAlign='center' weight='medium' className='spacer-sm'>
         {title || "Missing Title"}
       </Paragraph>
       <Typography
@@ -71,7 +71,7 @@ const Recipe = ({ title, description, image, chef, style }: Props) => {
           fontSize: "14px",
           lineHeight: "18px",
         }}
-        textAling='center'
+        textAlign='center'
         className='spacer-sm'
       >
         {description}
