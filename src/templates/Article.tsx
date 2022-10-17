@@ -33,9 +33,7 @@ const FixedBox = styled("div")<any>(({ theme }: { theme: ThemeType }) => ({
   },
 }));
 
-const Article: React.FC<
-  PageProps<Queries.ArticlePageQuery, { _id: string }>
-> = ({ pageContext, data }) => {
+const Article: React.FC<PageProps<Queries.ArticlePageQuery>> = ({ data }) => {
   const image = React.useMemo(
     () =>
       data.sanityRecipe?.image?.asset
