@@ -32,6 +32,16 @@ const config: GatsbyConfig = {
     "gatsby-plugin-styled-components",
     "gatsby-plugin-sitemap",
     {
+      resolve: `gatsby-plugin-gatsby-cloud`,
+      options: {
+        headers: {
+          "/static/*": ["cache-control: public, max-age=31536000, immutable"],
+          "/fonts/*": ["cache-control: public, max-age=31536000, immutable"],
+          "/*.svg": ["cache-control: public, max-age=31536000, immutable"],
+        },
+      },
+    },
+    {
       resolve: "gatsby-plugin-manifest",
       options: {
         "icon": "src/images/icon.png",
