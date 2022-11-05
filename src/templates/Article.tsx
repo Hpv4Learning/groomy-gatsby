@@ -56,7 +56,9 @@ const Article: React.FC<PageProps<Queries.ArticlePageQuery>> = ({ data }) => {
               width: "100%",
             }}
           >
-            <Display weight='semibold'>{data.sanityRecipe?.titolo}</Display>
+            <Display as='h1' weight='semibold'>
+              {data.sanityRecipe?.titolo}
+            </Display>
             {data.sanityRecipe?.riassunto ? (
               <div className='spacer-lg'>
                 <Heading>{data.sanityRecipe?.riassunto}</Heading>
@@ -81,6 +83,7 @@ const Article: React.FC<PageProps<Queries.ArticlePageQuery>> = ({ data }) => {
                   case "h2":
                     return text.children?.map((child) => (
                       <SubTitle
+                        as='h2'
                         className='spacer-xl'
                         key={child?._key}
                         weight='semibold'
@@ -90,7 +93,7 @@ const Article: React.FC<PageProps<Queries.ArticlePageQuery>> = ({ data }) => {
                     ));
                   default:
                     return text?.children?.map((child) => (
-                      <Heading className='spacer-sm' key={child?._key}>
+                      <Heading as='p' className='spacer-sm' key={child?._key}>
                         {child?.text}
                       </Heading>
                     ));

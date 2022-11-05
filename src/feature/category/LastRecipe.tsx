@@ -71,14 +71,16 @@ const LastRecipe: React.FC<Partial<LastRecipeProps>> = (props) => {
             }}
           >
             <div>
-              <Display weight='semibold'>{titolo}</Display>
+              <Display as='h2' weight='semibold'>
+                {titolo}
+              </Display>
               <div
                 className='spacer-md'
                 style={{
                   maxWidth: "596px",
                 }}
               >
-                <Heading>{riassunto}</Heading>
+                <Heading as='p'>{riassunto}</Heading>
               </div>
               {titolo ? (
                 <div className='spacer-lg'>

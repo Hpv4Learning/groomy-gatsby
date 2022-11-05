@@ -10,7 +10,7 @@ export const ReviewSection = () => {
     <>
       <div className='spacer-xxxl'>
         <Container>
-          <SubTitle textAlign='center' weight='semibold'>
+          <SubTitle as='h2' textAlign='center' weight='semibold'>
             I Nostri Chef
           </SubTitle>
           <div className='flex aling-items-center justify-content-between flex-wrap spacer-xl'>

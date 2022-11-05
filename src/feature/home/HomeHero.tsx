@@ -39,6 +39,7 @@ const HomeHero = () => {
       <Typography
         weight='heavy'
         color='white'
+        as='h1'
         style={{
           textTransform: "uppercase",
           fontSize: "260px",
