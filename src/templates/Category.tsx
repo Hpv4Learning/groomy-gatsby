@@ -2,65 +2,66 @@ import { graphql, PageProps } from "gatsby";
 import React from "react";
 import { Container, SubTitle } from "../components";
 import { Layout } from "../components/layout/Layout";
-import { CategoryProvider } from "../feature/category/context";
 import LastRecipe from "../feature/category/LastRecipe";
-import Paginator from "../feature/category/Paginator";
 import RecipeCategorySection from "../feature/category/ReacipeCategorySection";
+import { CategoryProvider } from "../feature/category/context";
 import { createSlugFromTitle } from "../utils";
+import Paginator from "../feature/category/Paginator";
+
+type ContextProps = {
+  titolo: string;
+  currentPage: number;
+  numOfPages: number;
+};
 
 const Category: React.FC<
-  PageProps<
-    Queries.CategoryPageQuery,
-    { title: string; _id: string; currentPage: number; numOfPages: number }
-  >
-> = ({ pageContext, data }) => {
+  PageProps<Queries.CategoryPageQuery, ContextProps>
+> = ({ data, pageContext }) => {
+  const { titolo, numOfPages, currentPage } = pageContext;
+
   const ctx = React.useMemo(
     () => ({
-      currentPage: pageContext.currentPage,
-      numOfPages: pageContext.numOfPages,
-      slug: createSlugFromTitle(pageContext.title) || "",
+      slug: createSlugFromTitle(titolo) || "",
+      numOfPages,
+      currentPage,
     }),
-    [],
+    [titolo],
   );
   return (
     <Layout>
       <CategoryProvider value={ctx}>
-        {data.allSanityRecipe ? <LastRecipe {...data.sanityRecipe} /> : null}
-        <div className='spacer-xxxl'>
-          <Container>
-            <SubTitle as='h2' weight='semibold'>
-              {`Le nostre ricette ${pageContext.title}`}
-            </SubTitle>
-          </Container>
+        {data.sanityRecipe ? <LastRecipe {...data.sanityRecipe} /> : null}
+        <Container>
           <div className='spacer-xl'>
-            <RecipeCategorySection ricette={data.allSanityRecipe.nodes} />
+            {titolo ? <SubTitle>{titolo}</SubTitle> : null}
           </div>
-        </div>
-        {pageContext.numOfPages > 0 ? (
+          {data.allSanityRecipe.nodes ? (
+            <div className='spacer-xl'>
+              <RecipeCategorySection ricette={data.allSanityRecipe.nodes} />
+            </div>
+          ) : null}
           <div className='spacer-xl'>
             <Paginator />
           </div>
-        ) : null}
+          <div className='spacer-xl'></div>
+        </Container>
       </CategoryProvider>
-      <div className='spacer-xxl'></div>
     </Layout>
   );
 };
 
-export default Category;
-
 export const query = graphql`
   query CategoryPage(
-    $start: Int!
-    $ITEM_PER_PAGE: Int!
     $lastItemId: String!
+    $ITEM_PER_PAGE: Int!
+    $start: Int!
     $articles: [String]
   ) {
     allSanityRecipe(
-      skip: $start
       sort: { order: DESC, fields: _createdAt }
-      limit: $ITEM_PER_PAGE
+      skip: $start
       filter: { _id: { in: $articles } }
+      limit: $ITEM_PER_PAGE
     ) {
       nodes {
         titolo
@@ -88,22 +89,4 @@ export const query = graphql`
   }
 `;
 
-//FAI ESEMPIO NON PAGINATO
-// export const query = graphql`
-//   query CategoryPage($_id: String!) {
-//     sanityCategory(_id: { eq: $_id }) {
-//       ricettario {
-//         riassunto
-//         titolo
-//         image {
-//           asset {
-//             gatsbyImageData
-//           }
-//         }
-//         cokkedby {
-//           complete_name
-//         }
-//       }
-//     }
-//   }
-// `;
+export default Category;

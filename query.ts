@@ -1,15 +1,17 @@
-export const categoryQuery = `{
-  allSanityCategory {
+export const categoryQuery = `
+{
+    allSanityCategory {
     nodes {
       _id
       titolo
-      ricettario {
-        _id
+       ricettario {
         _createdAt
+        _id
       }
     }
   }
-}`;
+}
+`;
 
 export type CategoryQueryProps = {
   data: {
@@ -26,27 +28,29 @@ export type CategoryQueryProps = {
   };
 };
 
-export const recipeQuery = `{
-  allSanityCategory {
+export const allRecipeQuery = `
+{
+  allSanityRecipe {
     nodes {
+      id
       titolo
-      ricettario {
-        _id
+      category {
         titolo
       }
     }
   }
-}`;
+}
+`;
 
-export type RecipeQueryProps = {
+export type AllRecipeQueryProps = {
   data: {
-    allSanityCategory: {
+    allSanityRecipe: {
       nodes: {
-        titolo: NonNullable<Queries.SanityCategory["titolo"]>;
-        ricettario: {
-          titolo: NonNullable<Queries.SanityRecipe["titolo"]>;
-          _id: NonNullable<Queries.SanityRecipe["_id"]>;
-        }[];
+        titolo: NonNullable<Queries.SanityRecipe["titolo"]>;
+        id: NonNullable<Queries.SanityRecipe["id"]>;
+        category: {
+          titolo: NonNullable<Queries.SanityRecipe["category"]>["titolo"];
+        };
       }[];
     };
   };

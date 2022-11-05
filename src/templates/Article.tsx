@@ -45,7 +45,7 @@ const Article: React.FC<PageProps<Queries.ArticlePageQuery>> = ({ data }) => {
     <Layout>
       <Container>
         <div
-          className='spacer-xxxl flex justify-content-between'
+          className='spacer-xxl flex justify-content-between'
           style={{
             position: "relative",
           }}
@@ -70,27 +70,24 @@ const Article: React.FC<PageProps<Queries.ArticlePageQuery>> = ({ data }) => {
                       height: "100%",
                     }}
                     image={image}
-                    alt={data.sanityRecipe?.titolo || "article placeholder"}
+                    alt={data.sanityRecipe?.titolo || "Placeholder Text"}
                   />
                 </ImageArticleBox>
               </div>
             ) : null}
-
             <div className='spacer-xxl'>
               {data.sanityRecipe?.descrizione?.map((text) => {
                 switch (text?.style) {
                   case "h2":
-                    return text?.children?.map((child) => (
+                    return text.children?.map((child) => (
                       <SubTitle
-                        as='h2'
-                        weight='semibold'
                         className='spacer-xl'
                         key={child?._key}
+                        weight='semibold'
                       >
                         {child?.text}
                       </SubTitle>
                     ));
-
                   default:
                     return text?.children?.map((child) => (
                       <Heading className='spacer-sm' key={child?._key}>
@@ -101,20 +98,20 @@ const Article: React.FC<PageProps<Queries.ArticlePageQuery>> = ({ data }) => {
               })}
             </div>
           </div>
-          {data.sanityRecipe?.ingredienti ? (
-            <div
-              style={{
-                position: "relative",
-                maxWidth: "396px",
-              }}
-            >
-              <FixedBox>
-                {data.sanityRecipe?.ingredienti.map((ingrediente) => (
-                  <Paragraph weight='medium'>{ingrediente}</Paragraph>
-                ))}
-              </FixedBox>
-            </div>
-          ) : null}
+          <div
+            style={{
+              position: "relative",
+              maxWidth: "396px",
+            }}
+          >
+            <FixedBox>
+              {data.sanityRecipe?.ingredienti?.map((ingrediente) => (
+                <Paragraph weight='medium' key={ingrediente}>
+                  {ingrediente}
+                </Paragraph>
+              ))}
+            </FixedBox>
+          </div>
         </div>
       </Container>
       <div className='spacer-xxl'></div>
@@ -123,21 +120,21 @@ const Article: React.FC<PageProps<Queries.ArticlePageQuery>> = ({ data }) => {
 };
 
 export const query = graphql`
-  query ArticlePage($_id: String!) {
-    sanityRecipe(_id: { eq: $_id }) {
+  query ArticlePage($id: String!) {
+    sanityRecipe(id: { eq: $id }) {
       titolo
       riassunto
-      ingredienti
-      image {
-        asset {
-          gatsbyImageData
-        }
-      }
       descrizione {
         style
         children {
           _key
           text
+        }
+      }
+      ingredienti
+      image {
+        asset {
+          gatsbyImageData
         }
       }
     }
