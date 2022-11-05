@@ -1,5 +1,6 @@
 import type { GatsbyConfig } from "gatsby";
 import { config as dotenv } from "dotenv";
+import { allSitePageQuery, AllSitePageQueryProps } from "./query";
 
 dotenv({
   path: `.env.${process.env.NODE_ENV}`,
@@ -7,14 +8,14 @@ dotenv({
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `Groomy`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl:
+      process.env.NODE_ENV === "production"
+        ? `https://groomygatsby.gatsbyjs.io/`
+        : "http://localhost:8000/",
     metaDescription:
       "Impara dai migliori chef italiani ricette orientali, funzionali ed estive",
     author: "@hpv4learning",
   },
-  // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
-  // If you use VSCode you can also use the GraphQL plugin
-  // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   trailingSlash: "always",
   plugins: [
@@ -30,7 +31,34 @@ const config: GatsbyConfig = {
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     "gatsby-plugin-styled-components",
-    "gatsby-plugin-sitemap",
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        excludes: ["/**/404", "/**/404.html"],
+        query: allSitePageQuery,
+        resolveSiteUrl: ({ site }: { site: Queries.Site }) =>
+          site?.siteMetadata?.siteUrl || process.env.GATSBY_CRAWL_URL,
+        resolvePages: ({ allSitePage }: AllSitePageQueryProps) => {
+          return allSitePage.nodes;
+        },
+        filterPages: ({ path }: { path: string }) => {
+          const paginatedPath = path.split("/").filter((x) => Boolean(x));
+          const isPaginated = !isNaN(
+            Number(paginatedPath[paginatedPath.length - 1]),
+          );
+          return isPaginated;
+        },
+        serialize: ({
+          path,
+        }: AllSitePageQueryProps["allSitePage"]["nodes"][number]) => {
+          return {
+            url: path,
+            priority: path === "/" ? 1.0 : 0.7,
+            changefreq: "daily",
+          };
+        },
+      },
+    },
     {
       resolve: `gatsby-plugin-gatsby-cloud`,
       options: {
