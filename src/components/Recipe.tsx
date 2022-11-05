@@ -63,10 +63,16 @@ const Recipe = ({ title, description, image, chef, style }: Props) => {
           />
         )}
       </div>
-      <Paragraph textAlign='center' weight='medium' className='spacer-sm'>
+      <Paragraph
+        as='h3'
+        textAlign='center'
+        weight='medium'
+        className='spacer-sm'
+      >
         {title || "Missing Title"}
       </Paragraph>
       <Typography
+        as='p'
         style={{
           fontSize: "14px",
           lineHeight: "18px",

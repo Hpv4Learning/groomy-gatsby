@@ -42,14 +42,16 @@ export const Review = ({ name, image }: Props) => {
             marginLeft: "8px",
           }}
         >
-          <Paragraph weight='medium'>{name || "Il nome"}</Paragraph>
+          <Paragraph as='p' weight='medium'>
+            {name || "Il nome"}
+          </Paragraph>
           <div className='spacer-xs'>
             {starCreator() ? starCreator() : null}
           </div>
         </div>
       </div>
       <div className='spacer-sm'>
-        <Label weight='regular' color='#657666'>
+        <Label as='p' weight='regular' color='#657666'>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit.
         </Label>
       </div>

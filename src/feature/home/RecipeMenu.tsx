@@ -53,7 +53,12 @@ const MenuItem = ({ title, image }: Props) => {
         </div>
       ) : null}
 
-      <Heading weight='semibold' textAlign='center' className='spacer-lg'>
+      <Heading
+        as='h2'
+        weight='semibold'
+        textAlign='center'
+        className='spacer-lg'
+      >
         {title}
       </Heading>
     </CustomBox>

@@ -33,7 +33,7 @@ const Category: React.FC<
         {data.sanityRecipe ? <LastRecipe {...data.sanityRecipe} /> : null}
         <Container>
           <div className='spacer-xl'>
-            {titolo ? <SubTitle>{titolo}</SubTitle> : null}
+            {titolo ? <SubTitle as='h2'>{titolo}</SubTitle> : null}
           </div>
           {data.allSanityRecipe.nodes ? (
             <div className='spacer-xl'>

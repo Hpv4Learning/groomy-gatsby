@@ -63,14 +63,16 @@ const AboutHero = () => {
           }}
         >
           <div style={{}}>
-            <Display weight='semibold'>Chi siamo</Display>
+            <Display as='h1' weight='semibold'>
+              Chi siamo
+            </Display>
             <div
               className='spacer-md'
               style={{
                 maxWidth: "596px",
               }}
             >
-              <Heading>
+              <Heading as='p'>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Laudantium rem, totam, voluptatum sed, architecto exercitationem
                 doloremque dolorem optio quae soluta deleniti vitae fugiat
