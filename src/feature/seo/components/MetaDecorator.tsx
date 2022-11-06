@@ -12,13 +12,16 @@ export const MetaDecorator = ({
   disableSlogan,
 }: DefaultMetaProps) => {
   const { title, description, author, siteUrl } = useSiteMetadata() || {};
+  const seoImage = React.useMemo(() => {
+    if (externalImage) return externalImage;
+    if (!image) return `${siteUrl}/logo.png`;
+    return `${siteUrl}${image}`;
+  }, [siteUrl]);
   const seoProps = React.useMemo(
     () => ({
       title: metaTitle || title,
       description: metaDescription || description,
-      image: externalImage
-        ? externalImage
-        : (siteUrl as string) + image || siteUrl + "/logo.png",
+      image: seoImage,
       imageHeight: imageHeight ? imageHeight.toString() : "512",
       imageWidth: imageWidth ? imageWidth.toString() : "512",
     }),
