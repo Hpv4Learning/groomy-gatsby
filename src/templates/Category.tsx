@@ -1,4 +1,4 @@
-import { graphql, PageProps } from "gatsby";
+import { graphql, HeadFC, PageProps } from "gatsby";
 import React from "react";
 import { Container, SubTitle } from "../components";
 import { Layout } from "../components/layout/Layout";
@@ -7,6 +7,7 @@ import RecipeCategorySection from "../feature/category/ReacipeCategorySection";
 import { CategoryProvider } from "../feature/category/context";
 import { createSlugFromTitle } from "../utils";
 import Paginator from "../feature/category/Paginator";
+import { MetaDecorator } from "../feature/seo/components";
 
 type ContextProps = {
   titolo: string;
@@ -56,6 +57,7 @@ export const query = graphql`
     $ITEM_PER_PAGE: Int!
     $start: Int!
     $articles: [String]
+    $category_id: String!
   ) {
     allSanityRecipe(
       sort: { order: DESC, fields: _createdAt }
@@ -86,7 +88,32 @@ export const query = graphql`
         }
       }
     }
+    seoInfo: sanityCategory(_id: { eq: $category_id }) {
+      riassunto
+      image {
+        asset {
+          url
+          path
+        }
+      }
+    }
   }
 `;
+
+export const Head: HeadFC<Queries.CategoryPageQuery, ContextProps> = ({
+  pageContext,
+  data,
+}) => {
+  const { seoInfo } = data;
+  return (
+    <>
+      <MetaDecorator
+        metaTitle={pageContext.titolo}
+        metaDescription={seoInfo?.riassunto}
+        externalImage={seoInfo?.image?.asset?.url}
+      />
+    </>
+  );
+};
 
 export default Category;

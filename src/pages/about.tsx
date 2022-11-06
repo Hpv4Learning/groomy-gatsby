@@ -14,13 +14,11 @@ const About = () => {
   );
 };
 
-export const Head: HeadFC<PageProps<Queries.AboutUsImageQuery>> = ({
-  data,
-}) => {
+export const Head: HeadFC<Queries.AboutUsImageQuery> = ({ data }) => {
   return (
     <>
       <MetaDecorator
-        image={data.data.file?.publicURL || undefined}
+        image={data.file?.publicURL || undefined}
         metaTitle='Chi sono i Groomy Chefs ?'
         disableSlogan
       />

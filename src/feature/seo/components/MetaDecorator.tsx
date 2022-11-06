@@ -6,6 +6,7 @@ export const MetaDecorator = ({
   metaTitle,
   metaDescription,
   image,
+  externalImage,
   imageHeight,
   imageWidth,
   disableSlogan,
@@ -15,7 +16,9 @@ export const MetaDecorator = ({
     () => ({
       title: metaTitle || title,
       description: metaDescription || description,
-      image: (siteUrl as string) + image || siteUrl + "/logo.png",
+      image: externalImage
+        ? externalImage
+        : (siteUrl as string) + image || siteUrl + "/logo.png",
       imageHeight: imageHeight ? imageHeight.toString() : "512",
       imageWidth: imageWidth ? imageWidth.toString() : "512",
     }),
