@@ -12,7 +12,7 @@ const config: GatsbyConfig = {
       process.env.NODE_ENV === "production"
         ? `https://groomygatsby.gatsbyjs.io/`
         : "http://localhost:8000/",
-    metaDescription:
+    description:
       "Impara dai migliori chef italiani ricette orientali, funzionali ed estive",
     author: "@hpv4learning",
   },
