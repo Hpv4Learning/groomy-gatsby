@@ -10,7 +10,7 @@ import {
   SubTitle,
 } from "../components";
 import { Layout } from "../components/layout/Layout";
-import { MetaDecorator } from "../feature/seo/components";
+import { LinkHandler, MetaDecorator } from "../feature/seo/components";
 import { ThemeType } from "../styles/theme";
 
 const ImageArticleBox = styled("div")({
@@ -154,6 +154,7 @@ export const Head: HeadFC<Queries.ArticlePageQuery> = ({ data }) => {
         metaDescription={data.sanityRecipe?.riassunto}
         externalImage={data.sanityRecipe?.image?.asset?.url}
       />
+      <LinkHandler />
     </>
   );
 };

@@ -3,7 +3,7 @@ import React from "react";
 import { Layout } from "../components/layout/Layout";
 import AboutHero from "../feature/about/AboutHero";
 import { ReviewSection } from "../feature/about/ReviewSection";
-import { MetaDecorator } from "../feature/seo/components";
+import { LinkHandler, MetaDecorator } from "../feature/seo/components";
 
 const About = () => {
   return (
@@ -22,6 +22,7 @@ export const Head: HeadFC<Queries.AboutUsImageQuery> = ({ data }) => {
         metaTitle='Chi sono i Groomy Chefs ?'
         disableSlogan
       />
+      <LinkHandler />
     </>
   );
 };

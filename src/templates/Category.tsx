@@ -7,7 +7,7 @@ import RecipeCategorySection from "../feature/category/ReacipeCategorySection";
 import { CategoryProvider } from "../feature/category/context";
 import { createSlugFromTitle } from "../utils";
 import Paginator from "../feature/category/Paginator";
-import { MetaDecorator } from "../feature/seo/components";
+import { LinkHandler, MetaDecorator } from "../feature/seo/components";
 
 type ContextProps = {
   titolo: string;
@@ -112,6 +112,7 @@ export const Head: HeadFC<Queries.CategoryPageQuery, ContextProps> = ({
         metaDescription={seoInfo?.riassunto}
         externalImage={seoInfo?.image?.asset?.url}
       />
+      <LinkHandler />
     </>
   );
 };
