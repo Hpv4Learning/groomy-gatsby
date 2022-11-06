@@ -1,4 +1,4 @@
-import { graphql, PageProps } from "gatsby";
+import { graphql, HeadFC, PageProps } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import React from "react";
 import styled from "styled-components";
@@ -10,6 +10,7 @@ import {
   SubTitle,
 } from "../components";
 import { Layout } from "../components/layout/Layout";
+import { MetaDecorator } from "../feature/seo/components";
 import { ThemeType } from "../styles/theme";
 
 const ImageArticleBox = styled("div")({
@@ -138,10 +139,23 @@ export const query = graphql`
       image {
         asset {
           gatsbyImageData
+          url
         }
       }
     }
   }
 `;
+
+export const Head: HeadFC<Queries.ArticlePageQuery> = ({ data }) => {
+  return (
+    <>
+      <MetaDecorator
+        metaTitle={data.sanityRecipe?.titolo as string}
+        metaDescription={data.sanityRecipe?.riassunto}
+        externalImage={data.sanityRecipe?.image?.asset?.url}
+      />
+    </>
+  );
+};
 
 export default Article;
