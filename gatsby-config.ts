@@ -87,6 +87,14 @@ const config: GatsbyConfig = {
     {
       resolve: "gatsby-source-filesystem",
       options: {
+        "name": "about_images",
+        "path": "./src/feature/about/images/",
+      },
+      __key: "about_images",
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
         "name": "pages",
         "path": "./src/pages/",
       },

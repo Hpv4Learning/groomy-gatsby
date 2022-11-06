@@ -15,7 +15,7 @@ export const MetaDecorator = ({
     () => ({
       title: metaTitle || title,
       description: metaDescription || description,
-      image: image || siteUrl + "logo.png",
+      image: (siteUrl as string) + image || siteUrl + "/logo.png",
       imageHeight: imageHeight ? imageHeight.toString() : "512",
       imageWidth: imageWidth ? imageWidth.toString() : "512",
     }),
@@ -34,7 +34,7 @@ export const MetaDecorator = ({
         content={seoProps.description as string}
       />
       <meta property='og:type' content='website' />
-      <meta property='twitter:card' content='summery' />
+      <meta property='twitter:card' content='summary' />
       <meta property='twitter:creator' content={author as string} />
       <meta property='twitter:title' content={seoProps.title as string} />
       <meta
