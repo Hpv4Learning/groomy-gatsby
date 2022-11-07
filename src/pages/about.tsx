@@ -3,7 +3,12 @@ import React from "react";
 import { Layout } from "../components/layout/Layout";
 import AboutHero from "../feature/about/AboutHero";
 import { ReviewSection } from "../feature/about/ReviewSection";
-import { LinkHandler, MetaDecorator } from "../feature/seo/components";
+import {
+  LinkHandler,
+  MetaDecorator,
+  WebPageSchema,
+} from "../feature/seo/components";
+import { useSiteMetadata } from "../feature/seo/hooks";
 
 const About = () => {
   return (
@@ -14,7 +19,19 @@ const About = () => {
   );
 };
 
+const BREADCRUMBS = [
+  {
+    text: "Home",
+    link: "/",
+  },
+  {
+    text: "Chi Siamo",
+    link: "/about-us/",
+  },
+];
+
 export const Head: HeadFC<Queries.AboutUsImageQuery> = ({ data }) => {
+  const { siteUrl } = useSiteMetadata() || {};
   return (
     <>
       <MetaDecorator
@@ -23,6 +40,16 @@ export const Head: HeadFC<Queries.AboutUsImageQuery> = ({ data }) => {
         disableSlogan
       />
       <LinkHandler />
+      <WebPageSchema
+        breadcrumbs={BREADCRUMBS}
+        image={
+          data.file?.publicURL
+            ? `${siteUrl}/${data.file?.publicURL}`
+            : undefined
+        }
+        metaTitle='Chi sono i Groomy Chefs ?'
+        type='AboutPage'
+      />
     </>
   );
 };

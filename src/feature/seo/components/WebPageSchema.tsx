@@ -1,24 +1,22 @@
 import React from "react";
 import { useBreadcrumbSchema } from "../hooks/useBreadcrumbSchema";
 import useWebPageSchema from "../hooks/useWebPageSchema";
-import { Breadcrumb, WebPageType } from "../types";
+import { Breadcrumb, GlobalSeoProps, WebPageType } from "../types";
 
 type Props = {
-  breadcrumbs: Breadcrumb[];
-  title?: string;
-  description?: string;
   type?: WebPageType;
-};
+  breadcrumbs: Breadcrumb[];
+} & GlobalSeoProps;
 
 export const WebPageSchema = ({
   breadcrumbs,
-  title,
-  description,
+  metaTitle,
+  metaDescription,
   type,
 }: Props) => {
   const schema = useWebPageSchema({
-    metaTitle: title,
-    metaDescription: description,
+    metaTitle,
+    metaDescription,
     type,
   });
   const breadcrumbSchema = useBreadcrumbSchema(breadcrumbs);

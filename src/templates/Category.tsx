@@ -7,7 +7,11 @@ import RecipeCategorySection from "../feature/category/ReacipeCategorySection";
 import { CategoryProvider } from "../feature/category/context";
 import { createSlugFromTitle } from "../utils";
 import Paginator from "../feature/category/Paginator";
-import { LinkHandler, MetaDecorator } from "../feature/seo/components";
+import {
+  LinkHandler,
+  MetaDecorator,
+  WebPageSchema,
+} from "../feature/seo/components";
 
 type ContextProps = {
   titolo: string;
@@ -105,6 +109,19 @@ export const Head: HeadFC<Queries.CategoryPageQuery, ContextProps> = ({
   data,
 }) => {
   const { seoInfo } = data;
+  const breadcrumbs = React.useMemo(
+    () => [
+      {
+        text: "Home",
+        link: "/",
+      },
+      {
+        text: pageContext.titolo,
+        link: `/${createSlugFromTitle(pageContext.titolo)}/`,
+      },
+    ],
+    [],
+  );
   return (
     <>
       <MetaDecorator
@@ -113,6 +130,12 @@ export const Head: HeadFC<Queries.CategoryPageQuery, ContextProps> = ({
         externalImage={seoInfo?.image?.asset?.url}
       />
       <LinkHandler />
+      <WebPageSchema
+        metaTitle={pageContext.titolo}
+        metaDescription={seoInfo?.riassunto}
+        image={seoInfo?.image?.asset?.url}
+        breadcrumbs={breadcrumbs}
+      />
     </>
   );
 };

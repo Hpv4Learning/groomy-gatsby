@@ -10,8 +10,14 @@ import {
   SubTitle,
 } from "../components";
 import { Layout } from "../components/layout/Layout";
-import { LinkHandler, MetaDecorator } from "../feature/seo/components";
+import {
+  ArticleSchema,
+  LinkHandler,
+  MetaDecorator,
+} from "../feature/seo/components";
 import { ThemeType } from "../styles/theme";
+import { useLocation } from "@reach/router";
+import { createSlugFromTitle } from "../utils";
 
 const ImageArticleBox = styled("div")({
   overflow: "hidden",
@@ -142,11 +148,35 @@ export const query = graphql`
           url
         }
       }
+      category {
+        titolo
+      }
     }
   }
 `;
 
 export const Head: HeadFC<Queries.ArticlePageQuery> = ({ data }) => {
+  const { pathname } = useLocation();
+
+  const breadcrumbs = React.useMemo(
+    () => [
+      {
+        text: "Home",
+        link: "/",
+      },
+      {
+        text: data.sanityRecipe?.category?.titolo as string,
+        link: `/${createSlugFromTitle(
+          data.sanityRecipe?.category?.titolo as string,
+        )}/`,
+      },
+      {
+        text: data.sanityRecipe?.titolo as string,
+        link: pathname,
+      },
+    ],
+    [pathname],
+  );
   return (
     <>
       <MetaDecorator
@@ -155,6 +185,12 @@ export const Head: HeadFC<Queries.ArticlePageQuery> = ({ data }) => {
         externalImage={data.sanityRecipe?.image?.asset?.url}
       />
       <LinkHandler />
+      <ArticleSchema
+        breadcrumbs={breadcrumbs}
+        metaTitle={data.sanityRecipe?.titolo as string}
+        metaDescription={data.sanityRecipe?.riassunto}
+        image={data.sanityRecipe?.image?.asset?.url}
+      />
     </>
   );
 };
