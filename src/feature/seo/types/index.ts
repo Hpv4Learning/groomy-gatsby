@@ -16,3 +16,8 @@ export type GlobalSeoProps = DefaultMetaProps & {
   modifiedDate?: string | undefined;
   type?: WebPageType;
 };
+
+export type Breadcrumb = {
+  text: string;
+  link: string;
+};
