@@ -15,6 +15,7 @@ const config: GatsbyConfig = {
     description:
       "Impara dai migliori chef italiani ricette orientali, funzionali ed estive",
     author: "@hpv4learning",
+    image: "/logo.png",
   },
   graphqlTypegen: true,
   trailingSlash: "always",

@@ -7,3 +7,12 @@ export type DefaultMetaProps = Partial<{
   imageHeight: number;
   disableSlogan?: true;
 }>;
+
+export type WebPageType = "AboutPage" | "ContactPage" | "ProductPage";
+
+export type GlobalSeoProps = DefaultMetaProps & {
+  imageAltText?: string | undefined;
+  publishDate?: string | undefined;
+  modifiedDate?: string | undefined;
+  type?: WebPageType;
+};

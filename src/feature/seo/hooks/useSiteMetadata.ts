@@ -15,6 +15,7 @@ const query = graphql`
         description
         siteUrl
         author
+        image
       }
     }
   }
