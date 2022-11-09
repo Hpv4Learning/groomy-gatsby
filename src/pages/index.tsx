@@ -1,60 +1,40 @@
 import * as React from "react";
 import type { HeadFC } from "gatsby";
-import styled from "styled-components";
-import { ThemeType } from "../styles/theme";
+import { Layout } from "../components/layout/Layout";
+import HomeHero from "../feature/home/HomeHero";
+import { Container } from "../components";
+import { RecipeMenu } from "../feature/home/RecipeMenu";
+import ReacipeSection from "../feature/home/ReacipeSection";
 import {
-  Button,
-  Container,
-  Display,
-  Heading,
-  Label,
-  Paragraph,
-  Subtitle,
-} from "../components";
-
-const Prova = styled.div(({ theme }: { theme: ThemeType }) => ({
-  width: "400px",
-  height: "400px",
-  background: theme.colors.orange[400],
-}));
+  LinkHandler,
+  MetaDecorator,
+  OrganizationSchema,
+} from "../feature/seo/components";
 
 const IndexPage = () => {
   return (
-    <main>
-      <Prova as='section' />
-      <Container>
-        <Label weight='heavy'>Lorem ipsum dolor sit amet consectetur.</Label>
-        <Paragraph weight='heavy'>
-          Lorem ipsum dolor sit amet consectetur.
-        </Paragraph>
-        <Heading weight='heavy'>
-          Lorem ipsum dolor sit amet consectetur.
-        </Heading>
-        <Subtitle weight='heavy'>
-          Lorem ipsum dolor sit amet consectetur.
-        </Subtitle>
-        <Display weight='heavy' as='h2'>
-          Lorem ipsum dolor sit amet consectetur.
-        </Display>
-        <div style={{ marginTop: "72" }}>
-          <Button>Contained</Button>
-          <Button color='purple'>Contained</Button>
-          <Button variant='outlined'>Outlined</Button>
-          <Button variant='outlined' size='sm' isRounded>
-            Outlined
-          </Button>
-          <Button leftIcon={<div>--K</div>} size='xl' variant='outlined'>
-            With Icon
-          </Button>
-          <Button rightIcon={<div>--K</div>} size='md'>
-            With Icon
-          </Button>
-        </div>
-      </Container>
-    </main>
+    <Layout>
+      <HomeHero />
+      <div className='spacer-xxxl'>
+        <Container>
+          <RecipeMenu />
+        </Container>
+      </div>
+      <div className='spacer-xxxl'>
+        <Container>
+          <ReacipeSection />
+        </Container>
+      </div>
+    </Layout>
   );
 };
 
 export default IndexPage;
 
-export const Head: HeadFC = () => <title>Home Page</title>;
+export const Head: HeadFC = () => (
+  <>
+    <MetaDecorator metaTitle='Home Page' />
+    <LinkHandler />
+    <OrganizationSchema />
+  </>
+);

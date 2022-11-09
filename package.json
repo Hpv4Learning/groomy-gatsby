@@ -11,14 +11,17 @@
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
+    "bootstrap": "gatsby clean && gatsby build && gatsby serve",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@react-icons/all-files": "^4.1.0",
     "babel-plugin-styled-components": "^2.0.7",
     "dotenv": "^16.0.2",
-    "gatsby": "^4.22.1",
+    "gatsby": "^4.24.1",
+    "gatsby-plugin-gatsby-cloud": "^4.24.1",
     "gatsby-plugin-image": "^2.22.0",
     "gatsby-plugin-manifest": "^4.22.0",
     "gatsby-plugin-sharp": "^4.22.0",
