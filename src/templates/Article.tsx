@@ -14,6 +14,7 @@ import {
   ArticleSchema,
   LinkHandler,
   MetaDecorator,
+  RecipeSchema,
 } from "../feature/seo/components";
 import { ThemeType } from "../styles/theme";
 import { useLocation } from "@reach/router";
@@ -134,6 +135,7 @@ export const query = graphql`
     sanityRecipe(id: { eq: $id }) {
       titolo
       riassunto
+      _createdAt
       descrizione {
         style
         children {
@@ -177,6 +179,21 @@ export const Head: HeadFC<Queries.ArticlePageQuery> = ({ data }) => {
     ],
     [pathname],
   );
+
+  const instructions = React.useMemo(() => {
+    if (!data.sanityRecipe?.descrizione) return;
+    const customValue = data.sanityRecipe.descrizione.filter(
+      (item) => item?.style === "normal",
+    );
+    if (customValue.length > 0) {
+      console.log(customValue);
+      const allTexts = customValue.map((el) =>
+        el?.children?.map((text) => text?.text).join(" "),
+      );
+      return allTexts.join(" ");
+    }
+    return;
+  }, [data.sanityRecipe?.descrizione]);
   return (
     <>
       <MetaDecorator
@@ -185,12 +202,24 @@ export const Head: HeadFC<Queries.ArticlePageQuery> = ({ data }) => {
         externalImage={data.sanityRecipe?.image?.asset?.url}
       />
       <LinkHandler />
-      <ArticleSchema
-        breadcrumbs={breadcrumbs}
-        metaTitle={data.sanityRecipe?.titolo as string}
-        metaDescription={data.sanityRecipe?.riassunto}
-        image={data.sanityRecipe?.image?.asset?.url}
-      />
+      {data.sanityRecipe?.ingredienti && instructions ? (
+        <RecipeSchema
+          breadcrumbs={breadcrumbs}
+          metaTitle={data.sanityRecipe?.titolo as string}
+          metaDescription={data.sanityRecipe?.riassunto}
+          image={data.sanityRecipe?.image?.asset?.url}
+          ingredients={data?.sanityRecipe?.ingredienti as string[]}
+          instructions={instructions}
+          published={data.sanityRecipe._createdAt as string}
+        />
+      ) : (
+        <ArticleSchema
+          breadcrumbs={breadcrumbs}
+          metaTitle={data.sanityRecipe?.titolo as string}
+          metaDescription={data.sanityRecipe?.riassunto}
+          image={data.sanityRecipe?.image?.asset?.url}
+        />
+      )}
     </>
   );
 };
