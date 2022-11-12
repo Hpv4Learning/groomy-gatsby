@@ -7,10 +7,14 @@ dotenv({
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `Groomy`,
-    siteUrl: `https://www.yourdomain.tld`,
-    metaDescription:
+    siteUrl:
+      process.env.NODE_ENV === "production"
+        ? `groomygatsbymain.gatsbyjs.io`
+        : "http://localhost:8000/",
+    description:
       "Impara dai migliori chef italiani ricette orientali, funzionali ed estive",
     author: "@hpv4learning",
+    image: "/logo.png",
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -26,6 +30,7 @@ const config: GatsbyConfig = {
         token: process.env.GATSBY_SANITY_TOKEN,
       },
     },
+    `gatsby-plugin-gatsby-cloud`,
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
