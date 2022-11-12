@@ -55,3 +55,39 @@ export type AllRecipeQueryProps = {
     };
   };
 };
+
+export const allSitePageQuery = `
+{
+  site {
+    siteMetadata {
+      siteUrl
+    }
+  }
+  allSitePage {
+    nodes {
+      path
+      pageContext
+    }
+  }
+}`;
+
+export type PageContext = {
+  titolo: string;
+  category_id: string;
+  lastItemId: string;
+  numOfPages: string;
+  currentPage: string;
+  start: string;
+  ITEM_PER_PAGE: string;
+  articles: (string | null)[];
+};
+
+export type AllSitePageQueryProps = {
+  site: Queries.Site;
+  allSitePage: {
+    nodes: {
+      pageContext?: PageContext;
+      path: string;
+    }[];
+  };
+};

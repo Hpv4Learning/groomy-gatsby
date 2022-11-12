@@ -1,5 +1,6 @@
 import type { GatsbyConfig } from "gatsby";
 import { config as dotenv } from "dotenv";
+import { allSitePageQuery, AllSitePageQueryProps } from "./query";
 
 dotenv({
   path: `.env.${process.env.NODE_ENV}`,
@@ -44,7 +45,33 @@ const config: GatsbyConfig = {
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     "gatsby-plugin-styled-components",
-    "gatsby-plugin-sitemap",
+    {
+      resolve: "gatsby-plugin-sitemap",
+      options: {
+        excludes: ["/**/404", "/**/404.html"],
+        query: allSitePageQuery,
+        resolveSiteUrl: ({ site }: { site: Queries.Site }) => {
+          return site.siteMetadata?.siteUrl;
+        },
+        resolvePages: ({ allSitePage }: AllSitePageQueryProps) => {
+          return allSitePage.nodes;
+        },
+        filterPages: ({ path }: { path: string }) => {
+          const paginatedPath = path.split("/").filter((x) => Boolean(x));
+          const isPaginated = !isNaN(
+            Number(paginatedPath[paginatedPath.length - 1]),
+          );
+          return isPaginated;
+        },
+        serialize: ({ path }: { path: string }) => {
+          return {
+            url: path,
+            priotity: path === "/" ? 1.0 : 0.7,
+            changefreq: "daily",
+          };
+        },
+      },
+    },
     {
       resolve: "gatsby-plugin-manifest",
       options: {
