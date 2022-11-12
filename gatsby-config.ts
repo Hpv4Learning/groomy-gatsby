@@ -9,7 +9,7 @@ const config: GatsbyConfig = {
     title: `Groomy`,
     siteUrl:
       process.env.NODE_ENV === "production"
-        ? `groomygatsbymain.gatsbyjs.io`
+        ? `https://groomygatsbymain.gatsbyjs.io`
         : "http://localhost:8000/",
     description:
       "Impara dai migliori chef italiani ricette orientali, funzionali ed estive",
@@ -30,7 +30,16 @@ const config: GatsbyConfig = {
         token: process.env.GATSBY_SANITY_TOKEN,
       },
     },
-    `gatsby-plugin-gatsby-cloud`,
+    {
+      resolve: `gatsby-plugin-gatsby-cloud`,
+      options: {
+        headers: {
+          "/static/*": ["cache-control: public, max-age=31536000, immutable"],
+          "/fonts/*": ["cache-control: public, max-age=31536000, immutable"],
+          "/*.png": ["cache-control: public, max-age=31536000, immutable"],
+        },
+      },
+    },
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
