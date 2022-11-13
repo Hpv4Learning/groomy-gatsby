@@ -7,7 +7,9 @@ const ReacipeSection = () => {
   const data: Queries.Last6RecipeQuery = useStaticQuery(query);
   return (
     <div>
-      <SubTitle weight='semibold'>Ricette più Recenti</SubTitle>
+      <SubTitle as='p' weight='semibold'>
+        Ricette più Recenti
+      </SubTitle>
       <Container className='spacer-lg'>
         <div className='flex justify-content-between flex-wrap'>
           {data.allSanityRecipe.nodes.map((recipe) =>

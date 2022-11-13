@@ -1,4 +1,4 @@
-import { graphql, PageProps } from "gatsby";
+import { graphql, HeadFC, PageProps } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import React from "react";
 import styled from "styled-components";
@@ -10,6 +10,7 @@ import {
   SubTitle,
 } from "../components";
 import { Layout } from "../components/layout/Layout";
+import { LinkHandler, MetaDecorator } from "../feature/seo/components";
 import { ThemeType } from "../styles/theme";
 
 const ImageArticleBox = styled("div")({
@@ -56,10 +57,12 @@ const Article: React.FC<PageProps<Queries.ArticlePageQuery>> = ({ data }) => {
               width: "100%",
             }}
           >
-            <Display weight='semibold'>{data.sanityRecipe?.titolo}</Display>
+            <Display as='h1' weight='semibold'>
+              {data.sanityRecipe?.titolo}
+            </Display>
             {data.sanityRecipe?.riassunto ? (
               <div className='spacer-lg'>
-                <Heading>{data.sanityRecipe?.riassunto}</Heading>
+                <Heading as='p'>{data.sanityRecipe?.riassunto}</Heading>
               </div>
             ) : null}
             {image ? (
@@ -81,6 +84,7 @@ const Article: React.FC<PageProps<Queries.ArticlePageQuery>> = ({ data }) => {
                   case "h2":
                     return text.children?.map((child) => (
                       <SubTitle
+                        as='h2'
                         className='spacer-xl'
                         key={child?._key}
                         weight='semibold'
@@ -90,7 +94,7 @@ const Article: React.FC<PageProps<Queries.ArticlePageQuery>> = ({ data }) => {
                     ));
                   default:
                     return text?.children?.map((child) => (
-                      <Heading className='spacer-sm' key={child?._key}>
+                      <Heading as='p' className='spacer-sm' key={child?._key}>
                         {child?.text}
                       </Heading>
                     ));
@@ -106,7 +110,7 @@ const Article: React.FC<PageProps<Queries.ArticlePageQuery>> = ({ data }) => {
           >
             <FixedBox>
               {data.sanityRecipe?.ingredienti?.map((ingrediente) => (
-                <Paragraph weight='medium' key={ingrediente}>
+                <Paragraph as='p' weight='medium' key={ingrediente}>
                   {ingrediente}
                 </Paragraph>
               ))}
@@ -116,6 +120,20 @@ const Article: React.FC<PageProps<Queries.ArticlePageQuery>> = ({ data }) => {
       </Container>
       <div className='spacer-xxl'></div>
     </Layout>
+  );
+};
+
+export const Head: HeadFC<Queries.ArticlePageQuery> = ({ data }) => {
+  return (
+    <>
+      <MetaDecorator
+        metaTitle={data.sanityRecipe?.titolo}
+        metaDescription={data.sanityRecipe?.riassunto}
+        externalImage={data.sanityRecipe?.image?.asset?.url}
+        disableSlogan
+      />
+      <LinkHandler />
+    </>
   );
 };
 
@@ -135,6 +153,7 @@ export const query = graphql`
       image {
         asset {
           gatsbyImageData
+          url
         }
       }
     }

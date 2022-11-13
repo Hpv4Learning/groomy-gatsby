@@ -5,6 +5,7 @@ import HomeHero from "../feature/home/HomeHero";
 import { Container } from "../components";
 import { RecipeMenu } from "../feature/home/RecipeMenu";
 import ReacipeSection from "../feature/home/ReacipeSection";
+import { LinkHandler, MetaDecorator } from "../feature/seo/components";
 
 const IndexPage = () => {
   return (
@@ -26,4 +27,9 @@ const IndexPage = () => {
 
 export default IndexPage;
 
-export const Head: HeadFC = () => <title>Home Page</title>;
+export const Head: HeadFC = () => (
+  <>
+    <MetaDecorator metaTitle={"Groomy: Ricette per Developers"} disableSlogan />
+    <LinkHandler />
+  </>
+);
