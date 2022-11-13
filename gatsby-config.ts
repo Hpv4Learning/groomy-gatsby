@@ -10,7 +10,7 @@ const config: GatsbyConfig = {
     title: `Groomy`,
     siteUrl:
       process.env.NODE_ENV === "production"
-        ? `https://groomygatsbymain.gatsbyjs.io`
+        ? `https://groomygatsbylayout.gatsbyjs.io/`
         : "http://localhost:8000/",
     description:
       "Impara dai migliori chef italiani ricette orientali, funzionali ed estive",
@@ -66,7 +66,7 @@ const config: GatsbyConfig = {
         serialize: ({ path }: { path: string }) => {
           return {
             url: path,
-            priotity: path === "/" ? 1.0 : 0.7,
+            priority: path === "/" ? 1.0 : 0.7,
             changefreq: "daily",
           };
         },
